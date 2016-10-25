@@ -7,14 +7,14 @@ module.exports = {
         var encodedeLoction = encodeURIComponent(location);
         var requestUrl = `${OPEN_WEATER_MAP_URL}&q=${encodedeLoction}`;
 
-        return axios.get(requestUrl).then(function(res) {
-          if (res.data.cod && res.data.message){
-            throw new Error(res.data.message);
+        return axios.get(requestUrl).then(function(err) {
+          if (err.res.data.cod && err.res.data.message){
+            throw new Error(err.res.data.message);
           }else{
             return res.data.main.temp;
           }
-        }, function(res) {
-          throw new Error(res.data.message);
+        }, function(err) {
+          throw new Error(err.response.data.message);
         });
     }
 };
